@@ -1,4 +1,5 @@
 package TechCourt;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,35 +19,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import DAO.*;
+import TechCourt.DAO.*;
 
 /**
- * Servlet implementation class Test
+ * Servlet implementation class GoToPosts
  */
-@WebServlet("/Test")
-public class Test extends HttpServlet {
+@WebServlet("/GoToPosts")
+public class GoToPosts extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Test() {
+    public GoToPosts() {
         super();
         // TODO Auto-generated constructor stub
     }
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doPost(request,response);
 	}
-	
 
-
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Post.updatePostsAttribute(request);
-		request.getRequestDispatcher("posts.jsp").forward(request, response);
-
-	}
-		/*System.out.println("Post");
+		// TODO Auto-generated method stub
 		List<Post> posts = new ArrayList<Post>();
 		posts = PostsDAO.getAllPosts(request);
 		
@@ -62,8 +64,6 @@ public class Test extends HttpServlet {
 		
 		request.getSession().setAttribute("posts", posts);
 		request.getRequestDispatcher("posts.jsp").forward(request, response);
-
-		
-	}*/
+	}
 
 }

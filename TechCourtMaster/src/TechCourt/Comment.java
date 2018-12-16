@@ -36,7 +36,7 @@ public class Comment extends TextEntity {
 	@Override
 	public List<Comment> getAllComments(HttpServletRequest request){
 		List<Comment> comments = new ArrayList<Comment>();
-		comments = CommentDAO.getAllCommentsByParentID(this.getParentID(), request);
+		comments = CommentDAO.getAllCommentsByParentID(this.getID(), request);
 		
 		
 		

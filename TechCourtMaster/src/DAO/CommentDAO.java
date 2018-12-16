@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -103,32 +104,32 @@ public class CommentDAO {
 		return comments;
 	}
 
-	public static List<Comment> getAllCommentsByParentID(Optional<Integer> id, HttpServletRequest request) {
+	public static List<Comment> getAllCommentsByParentID(int id, HttpServletRequest request) {
 		List<Comment> comments = new ArrayList<Comment>();
 		Connection conn = null;
 		DBUtil dbutil = new DBUtil();
-		if (id.isPresent()) {
-			try {
-				conn = dbutil.getConnection(request);
-				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery("select * from comments where parent = " + id.get());
-				while (rs.next()) {
 
-					Comment comment = new Comment();
-					comment = getCommentFromSet(rs, request);
-					comments.add(comment);
-				}
-			}
+		try {
+			conn = dbutil.getConnection(request);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from comments where parent = " + id);
+			while (rs.next()) {
 
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			finally {
-				dbutil.closeConnection(conn);
-
+				Comment comment = new Comment();
+				comment = getCommentFromSet(rs, request);
+				comments.add(comment);
 			}
 		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		finally {
+			dbutil.closeConnection(conn);
+
+		}
+		System.out.println(comments.size());
 		return comments;
 	}
 
@@ -142,6 +143,77 @@ public class CommentDAO {
 		comment.setPoints(rs.getInt(6));
 		comment.setParentID(Optional.ofNullable(rs.getInt(7)));
 		return comment;
+	}
+	
+	public static void insertComment(Comment comment, HttpServletRequest request)  {
+		Connection conn = null;
+		DBUtil dbutil = new DBUtil();
+		try {
+			conn = dbutil.getConnection(request);
+			PreparedStatement pstmt = conn.prepareStatement("insert into comments (author,post,content,parent) values (?,?,?,?)");
+			pstmt.setInt(1, comment.getAuthor().getUserID());
+			pstmt.setInt(2, comment.getPost().getID());
+			pstmt.setString(3, comment.getContent());
+			pstmt.setNull(4, Types.INTEGER);
+			comment.getParentID().ifPresent(parentid -> {
+				try {
+					pstmt.setInt(4, parentid);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+			pstmt.executeUpdate();
+			
+		}
+		
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			dbutil.closeConnection(conn);
+		}
+	}
+	
+	public static void incrementPoints(HttpServletRequest request, int id) {
+		Connection conn = null;
+		DBUtil dbutil = new DBUtil();
+		try {
+			conn = dbutil.getConnection(request);
+			PreparedStatement pstmt = conn.prepareStatement("update comments set points = points + 1 where commentid = ?");
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+		}
+		
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			dbutil.closeConnection(conn);
+		}
+	}
+	
+	public static void deleteComment(HttpServletRequest request, int id) {
+		Connection conn = null;
+		DBUtil dbutil = new DBUtil();
+		System.out.println(id);
+		try {
+			conn = dbutil.getConnection(request);
+			System.out.println("update comments set post = 2 where commentid = " + id);
+			PreparedStatement pstmt = conn.prepareStatement("update comments set post = 2 where commentid = ?");
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+		}
+		
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			dbutil.closeConnection(conn);
+		}
 	}
 
 }

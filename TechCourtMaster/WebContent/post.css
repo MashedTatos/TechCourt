@@ -3,13 +3,28 @@
 .content{
 	border-style : solid;
 	margin-left:100px;
+	margin-right : 600px;
 	
 }
 .comment{
 	margin-left: 120px;
+	border-style : solid;
+	border-width:1px;
+	margin-right: 700px;
 }
 
-.title{
-	font-size: 150%;
-	margin-left:80px;
+.subcomment{
+	margin-left: 140px;
+	margin-right: 700px;
+	border:1px solid;
+	margin-top:10px;
+}
+
+#title{
+	font-size: 200%;
+	margin-left: 100px;
+}
+
+.comment-footer{
+	font-size: 75%;
 }

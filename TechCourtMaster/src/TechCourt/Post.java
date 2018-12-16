@@ -5,7 +5,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+<<<<<<< HEAD
 import DAO.CommentDAO;
+=======
+import TechCourt.DAO.CommentDAO;
+import TechCourt.DAO.PostsDAO;
+>>>>>>> 12342c20c067dff740d78ca896e02d763e082340
 
 public class Post extends TextEntity  {
 	private String name;
@@ -47,6 +52,26 @@ public class Post extends TextEntity  {
 	public String toString() {
 		return "Post [postID=" + getID() + ", name=" + name + ", content=" + getContent() + ", author=" + getAuthor() + ", point="
 				+ getPoints() + ", views=" + views + ", topic=" + topic + "]";
+	}
+	
+	public static void updatePostsAttribute(HttpServletRequest request) {
+		List<Post> posts = new ArrayList<Post>();
+		posts = PostsDAO.getAllPosts(request);
+		
+		for(Post p : posts) {
+			p.setComments((ArrayList<Comment>)p.getAllComments(request));
+			
+			for(Comment c : p.getComments()) {
+				c.setComments((ArrayList<Comment>)c.getAllComments(request));
+				System.out.println(c.getAuthor().getUsername());
+				for(Comment c2: c.getComments()) {
+					System.out.println(c2.getAuthor().getUsername());
+				}
+				
+			}
+		}
+		
+		request.getSession().setAttribute("posts", posts);
 	}
 	
 	
