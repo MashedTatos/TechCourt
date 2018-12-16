@@ -84,7 +84,7 @@ public class CommentDAO {
 		try {
 			conn = dbutil.getConnection(request);
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from comments where post = " + id);
+			ResultSet rs = stmt.executeQuery("select * from comments where post = " + id + " order by points desc");
 			while (rs.next()) {
 
 				Comment comment = new Comment();
@@ -112,7 +112,7 @@ public class CommentDAO {
 		try {
 			conn = dbutil.getConnection(request);
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from comments where parent = " + id);
+			ResultSet rs = stmt.executeQuery("select * from comments where parent = " + id + " order by points desc");
 			while (rs.next()) {
 
 				Comment comment = new Comment();
@@ -129,7 +129,6 @@ public class CommentDAO {
 			dbutil.closeConnection(conn);
 
 		}
-		System.out.println(comments.size());
 		return comments;
 	}
 
@@ -198,11 +197,10 @@ public class CommentDAO {
 	public static void deleteComment(HttpServletRequest request, int id) {
 		Connection conn = null;
 		DBUtil dbutil = new DBUtil();
-		System.out.println(id);
 		try {
 			conn = dbutil.getConnection(request);
-			System.out.println("update comments set post = 2 where commentid = " + id);
-			PreparedStatement pstmt = conn.prepareStatement("update comments set post = 2 where commentid = ?");
+
+			PreparedStatement pstmt = conn.prepareStatement("update comments set content = '<em>This comment has been removed by the moderators</em>' where commentid = ?");
 			pstmt.setInt(1, id);
 			pstmt.executeUpdate();
 		}

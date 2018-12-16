@@ -1,13 +1,17 @@
 package TechCourt;
 
 import java.io.IOException;
+import java.util.Optional;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import TechCourt.DAO.AccountDAO;
 import TechCourt.DAO.CommentDAO;
+import TechCourt.DAO.PostsDAO;
 
 /**
  * Servlet implementation class CommentAction
@@ -46,8 +50,19 @@ public class CommentAction extends HttpServlet {
 		else if(buttonAction.equals("Delete")) {
 			CommentDAO.deleteComment(request, id);
 		}
-
-		request.getRequestDispatcher("test.jsp?id=" + request.getParameter("postId") ).forward(request, response);
+		
+		
+		else if(buttonAction.equals("Reply")) {
+			Comment comment = new Comment();
+			comment.setAuthor(AccountDAO.getAccountByID(3, request));
+			comment.setPost(PostsDAO.getPostByID(postid, request));
+			comment.setContent(request.getParameter("reply"));
+			comment.setParentID(Optional.ofNullable(id));
+			CommentDAO.insertComment(comment, request);
+			
+		}
+		response.sendRedirect("post.jsp?id=" + request.getParameter("postId"));
+		//request.getRequestDispatcher("post.jsp?id=" + request.getParameter("postId") ).forward(request, response);
 	}
 
 }

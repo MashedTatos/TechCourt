@@ -43,7 +43,9 @@ public class MakeComment extends HttpServlet {
 		Comment comment = new Comment();
 		comment.setAuthor(AccountDAO.getAccountByID(3, request));
 		comment.setPost(PostsDAO.getPostByID(Integer.parseInt(request.getParameter("postId")), request));
-		comment.setContent(request.getParameter("comment"));
+		String content = TextParser.parseText(request.getParameter("comment"));
+		comment.setContent(content);
+		System.out.println(content);
 		if(request.getParameter("parentid") != null) {
 			comment.setParentID(Optional.ofNullable(Integer.parseInt(request.getParameter("parentid"))));
 		}
@@ -52,8 +54,8 @@ public class MakeComment extends HttpServlet {
 			comment.setParentID(Optional.empty());
 		}
 		CommentDAO.insertComment(comment, request);
-		Post.updatePostsAttribute(request);
-		request.getRequestDispatcher("test.jsp?id=" + request.getParameter("postId") ).forward(request, response);
+
+		request.getRequestDispatcher("post.jsp?id=" + request.getParameter("postId") ).forward(request, response);
 	}
 
 }

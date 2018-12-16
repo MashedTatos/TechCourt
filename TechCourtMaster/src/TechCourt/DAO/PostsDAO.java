@@ -126,7 +126,7 @@ public class PostsDAO {
 		post.setComments((ArrayList<Comment>) post.getAllComments(request));
 		for (Comment c : post.getComments()) {
 			c.setComments((ArrayList<Comment>) c.getAllComments(request));
-			System.out.println(c.getAuthor().getUsername());
+
 		}
 		return post;
 	}

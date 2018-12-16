@@ -14,7 +14,7 @@ Posts
 
 	<c:forEach items="${sessionScope.posts }" var = "post">
 	
-	<br><a href = "test.jsp?id=${post.ID}"><c:out value = "${post.name }"></c:out></a>
+	<br><a href = "post.jsp?id=${post.ID}"><c:out value = "${post.name }"></c:out></a>
 	
 	</c:forEach>
 

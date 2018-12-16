@@ -33,6 +33,7 @@ public class Comment extends TextEntity {
 		this.post = post;
 	}
 	
+	//Gets all replys to this comments
 	@Override
 	public List<Comment> getAllComments(HttpServletRequest request){
 		List<Comment> comments = new ArrayList<Comment>();
