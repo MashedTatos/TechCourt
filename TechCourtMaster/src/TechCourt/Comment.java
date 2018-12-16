@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
-import TechCourt.DAO.CommentDAO;
+import DAO.CommentDAO;
 
 public class Comment extends TextEntity {
 

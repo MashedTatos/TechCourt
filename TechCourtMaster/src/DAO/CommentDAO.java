@@ -1,4 +1,4 @@
-package TechCourt.DAO;
+package DAO;
 
 import TechCourt.Comment;
 import TechCourt.DBUtil;

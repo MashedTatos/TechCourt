@@ -1,0 +1,68 @@
+@charset "ISO-8859-1";
+
+#textformat1{
+	color:blue;
+	font-weight:bold;
+	font-size:1.5em;
+}
+
+#textformat2{
+	color: red;
+	font-weight:bold;
+	font-size:1em;
+}
+
+html{
+	margin: 0;
+	background-image:url("https://images.trvl-media.com/media/content/expus/graphics/launch/home/tvly/150324_flights-hero-image_1330x742.jpg");
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+	height: 100%;
+}
+
+section {
+    border: thick solid black;
+    padding: 0.5%;
+    border-radius: 10px;
+    width: 30%;
+    margin: 1%;
+	background-color: grey;
+	opacity: 0.8;
+	margin-left: auto ;
+	margin-right: auto ;
+}
+
+h1{
+	color:red;
+}
+
+div{
+	width: 100%;
+	margin: auto;
+	top: 50%;
+	position: relative;
+	vertical-align: middle;
+	display: block;
+	margin-top: 300px;
+}
+
+.bar{
+	width: 70%;
+	border: 3px solid #00B4CC;
+	outline: none;
+	padding: 10px;
+	font-size: 25px;
+	align: center;
+	top: 50%;
+}
+
+.btn{
+	width: 20%;
+	padding: 10px;
+	font-size: 25px;
+	border: 3px solid #ff0080;
+	background-color: green;
+	align: center;
+	top: 50%;
+}

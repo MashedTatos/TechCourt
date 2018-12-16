@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import TechCourt.DAO.*;
+
 import javax.servlet.http.HttpServletRequest;
 
-import TechCourt.DAO.*;
+import DAO.*;
 public class Account implements Serializable {
 
 	private int userID;
