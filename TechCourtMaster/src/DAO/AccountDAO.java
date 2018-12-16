@@ -1,21 +1,16 @@
-package TechCourt.DAO;
+package DAO;
 import TechCourt.Account;
-import TechCourt.Account.AccountType;
 import TechCourt.DBUtil;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 public class AccountDAO {
 
 	
@@ -148,5 +143,29 @@ public class AccountDAO {
 		
 	}
 	
+	public static Account getAccountByUsername(String username, HttpServletRequest request){
+		Connection conn = null;
+		Account account = new Account();
+		DBUtil dbutil = new DBUtil();
+		try {
+			conn = dbutil.getConnection(request);
+			PreparedStatement select = conn.prepareStatement("select * from accounts where Username = ?");
+			
+			select.setString(1, username);
+			ResultSet set = select.executeQuery();
+			while(set.next()) {
+				account = getAccountFromSet(set);		
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			dbutil.closeConnection(conn);
+		}
+		return account;
+		
+	}
 	
 }

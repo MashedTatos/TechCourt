@@ -1,7 +1,6 @@
 package TechCourt;
 import java.sql.*;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 public class DBUtil {
 

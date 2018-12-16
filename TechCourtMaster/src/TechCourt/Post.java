@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import TechCourt.DAO.CommentDAO;
+import DAO.CommentDAO;
 
 public class Post extends TextEntity  {
 	private String name;

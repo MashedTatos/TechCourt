@@ -1,4 +1,4 @@
-package TechCourt.DAO;
+package DAO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -121,4 +121,29 @@ public class PostsDAO {
 		
 	}
 	
+	public static List<Post> getPostByUsername(String username, HttpServletRequest request) {
+		List<Post> posts = new ArrayList<Post>();
+		Connection conn = null;
+		DBUtil dbutil = new DBUtil();
+		Post post = new Post();
+		try {
+			conn = dbutil.getConnection(request);
+			PreparedStatement pstmt = conn.prepareStatement("select * from posts where author in (select userid from accounts where username = ?)");
+			pstmt.setString(1, username);
+			ResultSet set = pstmt.executeQuery();
+			
+			while(set.next()) {
+				post=getPostFromSet(set,request);
+				posts.add(post);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			dbutil.closeConnection(conn);
+		}
+		return posts;		
+	}
 }
