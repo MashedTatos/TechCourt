@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import TechCourt.DAO.AccountDAO;
-import TechCourt.DAO.CommentDAO;
-import TechCourt.DAO.PostsDAO;
+import DAO.AccountDAO;
+import DAO.CommentDAO;
+import DAO.PostsDAO;
 
 /**
  * Servlet implementation class MakeComment
