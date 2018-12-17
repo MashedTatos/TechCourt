@@ -74,6 +74,10 @@ public class PostsDAO {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		finally {
+			dbutil.closeConnection(conn);
+		}
 
 		return post;
 
@@ -100,7 +104,7 @@ public class PostsDAO {
 		}
 
 		finally {
-			conn.close();
+			dbutil.closeConnection(conn);
 		}
 		return topic;
 	}
