@@ -1,3 +1,4 @@
+<%@page import="DAO.AccountDAO"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="DAO.PostsDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%> 
@@ -14,28 +15,33 @@
 </head>
 <body>
 <%
-List<Post> posts = (ArrayList<Post>)session.getAttribute("posts");
+String username = request.getParameter("username");
+List<Post> posts = (ArrayList<Post>)PostsDAO.getPostByUsername(username, request);
+Account account = (Account)AccountDAO.getAccountByUsername(username, request);
 %>
 
 <div>
 <br><hr>
 <table>
 <tr>
-<th><a href="homepage.jsp">HOME</a></th>
+<th><a href="main.jsp">HOME</a></th>
 <th><a href="SearchPage.html">SEARCH</a></th>
-<th><a href="EditAccount.jsp">EDIT ACCOUNT</a></th>
 </tr>
 </table>
 </div>
 
-<h1>Welcome ${sessionScope.account.username }</h1>
+<h1>Username: <%=account.getUsername() %></h1>
+<h2>Points: <%=account.getPoints() %></h2>
+<h2>Date Joined: <%=account.getDateJoined() %></h2>
+<h2>Account type: <%=account.getAccountType() %></h2>
+
 <br>
 <div>
 <table style="width:100%">
 <tr>
 <th>Posts</th>
 </tr>
-<c:forEach items="${sessionScope.posts }" var = "post">
+<c:forEach items="${posts }" var = "post">
 <tr>
 <td>
 <a href = "post.jsp?id=${post.ID}"><c:out value = "${post.name }"></c:out></a>
@@ -43,10 +49,6 @@ List<Post> posts = (ArrayList<Post>)session.getAttribute("posts");
 </tr>
 </c:forEach>
 </table>
-</div>
-<br>
-<div>
-<a href="Logout.jsp">Logout</a>
 </div>
 </body>
 </html>
