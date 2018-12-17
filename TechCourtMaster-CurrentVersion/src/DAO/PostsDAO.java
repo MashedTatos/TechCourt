@@ -155,4 +155,30 @@ public class PostsDAO {
 		}
 		return posts;
 	}
+	
+	public static List<Post> getPostBySearch(String search, HttpServletRequest request) {
+		List<Post> posts = new ArrayList<Post>();
+		Connection conn = null;
+		DBUtil dbutil = new DBUtil();
+		Post post = new Post();
+		try {
+			conn = dbutil.getConnection(request);
+			PreparedStatement pstmt = conn.prepareStatement("select * from posts where content like ?");
+			pstmt.setString(1, "%" + search + "%");
+			ResultSet set = pstmt.executeQuery();
+
+			while(set.next()) {
+				post=getPostFromSet(set,request);
+				posts.add(post);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+
+		finally {
+			dbutil.closeConnection(conn);
+		}
+		return posts;
+	}
 }

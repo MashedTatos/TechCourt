@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.AccountDAO;
+import DAO.CommentDAO;
+import DAO.PostsDAO;
 import TechCourt.Account;
+import TechCourt.Comment;
+import TechCourt.Post;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -38,7 +44,15 @@ public class LoginServlet extends HttpServlet {
 		
 		if(password.equals(dbPassword)) {
 			out.println("<html><head><title>Login Successful</title></head><body><h1>Login successful</h1></body></html>");
-			session.setAttribute("account", account);
+			request.getSession().setAttribute("account", account);
+			
+			List<Post> posts = new ArrayList<Post>();
+			posts = PostsDAO.getPostByUsername(username, request);
+			request.getSession().setAttribute("posts", posts);
+			
+			List<Comment> comments = new ArrayList<Comment>();
+			comments = CommentDAO.getCommentByUsername(username, request);
+			request.getSession().setAttribute("comments", comments);
 			request.getRequestDispatcher("AccountPage.jsp").forward(request, response);
 
 		}else {
