@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 			request.getSession().setAttribute("posts", posts);
 			
 			List<Comment> comments = new ArrayList<Comment>();
-			comments = CommentDAO.getCommentByUsername(username, request);
+			
 			request.getSession().setAttribute("comments", comments);
 			request.getRequestDispatcher("AccountPage.jsp").forward(request, response);
 

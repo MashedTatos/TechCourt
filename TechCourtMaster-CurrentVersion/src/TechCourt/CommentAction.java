@@ -43,26 +43,31 @@ public class CommentAction extends HttpServlet {
 		String buttonAction = request.getParameter("buttonAction");
 		int id = Integer.parseInt(request.getParameter("commentId"));
 		int postid = Integer.parseInt(request.getParameter("postId"));
-		if(buttonAction.equals("Vote")) {
-			CommentDAO.incrementPoints(request, id);
-		}
-		
-		else if(buttonAction.equals("Delete")) {
-			CommentDAO.deleteComment(request, id);
-		}
-		
-		
-		else if(buttonAction.equals("Reply")) {
-			Comment comment = new Comment();
-			comment.setAuthor(AccountDAO.getAccountByID(3, request));
-			comment.setPost(PostsDAO.getPostByID(postid, request));
-			comment.setContent(request.getParameter("reply"));
-			comment.setParentID(Optional.ofNullable(id));
-			CommentDAO.insertComment(comment, request);
-			
+		Account account = (Account) request.getSession().getAttribute("account");
+		if (request.getSession().getAttribute("account") == null) {
+			request.setAttribute("notLoggedIn", true);
+		} else {
+			if (buttonAction.equals("Vote")) {
+				CommentDAO.incrementPoints(request, id);
+			}
+
+			else if (buttonAction.equals("Delete")) {
+				CommentDAO.deleteComment(request, id);
+			}
+
+			else if (buttonAction.equals("Reply")) {
+				Comment comment = new Comment();
+				comment.setAuthor(account);
+				comment.setPost(PostsDAO.getPostByID(postid, request));
+				comment.setContent(request.getParameter("reply"));
+				comment.setParentID(Optional.ofNullable(id));
+				CommentDAO.insertComment(comment, request);
+
+			}
 		}
 		response.sendRedirect("post.jsp?id=" + request.getParameter("postId"));
-		//request.getRequestDispatcher("post.jsp?id=" + request.getParameter("postId") ).forward(request, response);
+		// request.getRequestDispatcher("post.jsp?id=" + request.getParameter("postId")
+		// ).forward(request, response);
 	}
 
 }

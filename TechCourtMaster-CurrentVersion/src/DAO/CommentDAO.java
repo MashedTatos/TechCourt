@@ -2,7 +2,6 @@ package DAO;
 
 import TechCourt.Comment;
 import TechCourt.DBUtil;
-import TechCourt.Post;
 import TechCourt.TextEntity;
 
 import java.io.File;
@@ -85,7 +84,7 @@ public class CommentDAO {
 		try {
 			conn = dbutil.getConnection(request);
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from comments where post = " + id);
+			ResultSet rs = stmt.executeQuery("select * from comments where post = " + id + " order by points desc");
 			while (rs.next()) {
 
 				Comment comment = new Comment();
@@ -105,7 +104,7 @@ public class CommentDAO {
 		return comments;
 	}
 
-	public static List<Comment> getAllCommentsByParentID(Optional<Integer> optional, HttpServletRequest request) {
+	public static List<Comment> getAllCommentsByParentID(int id, HttpServletRequest request) {
 		List<Comment> comments = new ArrayList<Comment>();
 		Connection conn = null;
 		DBUtil dbutil = new DBUtil();
@@ -113,7 +112,7 @@ public class CommentDAO {
 		try {
 			conn = dbutil.getConnection(request);
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from comments where parent = " + optional);
+			ResultSet rs = stmt.executeQuery("select * from comments where parent = " + id + " order by points desc");
 			while (rs.next()) {
 
 				Comment comment = new Comment();
@@ -130,7 +129,6 @@ public class CommentDAO {
 			dbutil.closeConnection(conn);
 
 		}
-		System.out.println(comments.size());
 		return comments;
 	}
 
@@ -199,11 +197,10 @@ public class CommentDAO {
 	public static void deleteComment(HttpServletRequest request, int id) {
 		Connection conn = null;
 		DBUtil dbutil = new DBUtil();
-		System.out.println(id);
 		try {
 			conn = dbutil.getConnection(request);
-			System.out.println("update comments set post = 2 where commentid = " + id);
-			PreparedStatement pstmt = conn.prepareStatement("update comments set post = 2 where commentid = ?");
+
+			PreparedStatement pstmt = conn.prepareStatement("update comments set content = '<em>This comment has been removed by the moderators</em>' where commentid = ?");
 			pstmt.setInt(1, id);
 			pstmt.executeUpdate();
 		}
@@ -217,30 +214,4 @@ public class CommentDAO {
 		}
 	}
 
-	
-	public static List<Comment> getCommentByUsername(String username, HttpServletRequest request) {
-		List<Comment> comments = new ArrayList<Comment>();
-		Connection conn = null;
-		DBUtil dbutil = new DBUtil();
-		Comment comment = new Comment();
-		try {
-			conn = dbutil.getConnection(request);
-			PreparedStatement pstmt = conn.prepareStatement("select * from comments where author in (select userid from accounts where username =?)");
-			pstmt.setString(1, username);
-			ResultSet set = pstmt.executeQuery();
-			
-			while(set.next()) {
-				comment=getCommentFromSet(set,request);
-				comments.add(comment);
-			}
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
-		finally {
-			dbutil.closeConnection(conn);
-		}
-		return comments;		
-	}
 }
