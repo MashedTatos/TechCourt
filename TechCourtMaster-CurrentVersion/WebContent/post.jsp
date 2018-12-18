@@ -32,9 +32,9 @@ You are not logged in
 			type="text" name="search"><font color="black"><button><i style ="color:black;"class="fas fa-search"></i></button></font></a></form></li>
 	</ul>
 	<ul class="header" id="myHeader">
-		<li><a>Home</a></li>
-		<li><a>Posts</a></li>
-		<li><a>User</a></li>
+		<li><a href="Main.jsp">Home</a></li>
+		<li><a href="post.jsp?id=1">Posts</a></li>
+		<li><a href="UserPage.jsp">User</a></li>
 	</ul>
 
 
