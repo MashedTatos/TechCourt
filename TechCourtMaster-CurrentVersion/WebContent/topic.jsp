@@ -18,13 +18,17 @@
 <sql:query dataSource="${snapshot }" var="resultposts">
 	select * from posts where topic = <c:out value="${param.id }" />
 </sql:query>
-
+<c:forEach var="topic" items = "${result.rows }">
+<c:set var="topicname" scope="page" value="${topic.TopicName }"/>
+</c:forEach>
 </head>
 <body>
 <ul style="height: 2em;border-bottom-color: mediumpurple;border-style: solid;border-width: 0px 0px 1px 0px;" class="top-container">
-
-			<li style="float: right;"><a style="background-color: aliceblue;margin: 0px;padding: 2px;opacity: .2"><input type="text" name="search"><font color="purple"><i class="fas fa-gavel"></i></font></a></li>
-
+		
+			<form action="SearchResult" method="post"><a
+		style="background-color: aliceblue; margin: 0px; padding: 2px; opacity: .2"><input
+			type="text" name="search"><font color="black"><button><i style ="color:black;"class="fas fa-search"></i></button></font></a></form></li>
+			<p align="center"><c:out value="${topicname }"/></p>
 		</ul>
 
 		<ul class="header" id="myHeader">
@@ -41,89 +45,41 @@
 
 
 
-<div class="row" style="margin: 0px;padding: 0;">
+	<div class="row" style="margin: 0px; padding: 0;">
+		<!--User Box START/!-->
+		<div class="column2" id="tools"
+			style="background-color: silver; margin-top: 1em; margin-right: 1em; padding: 0px; text-align: center">
 
-	<!--User Box START/!-->
+			<c:choose>
+				<c:when test="${account != null}">
+					<a href="UserPage.jsp?username=${account.username }"><c:out value="${account.username }"></c:out></a>
+					<br>
+				</c:when>
 
-	<div class="column2" id="tools" style="background-color: silver; margin-top: 1em; margin-right: 1em;padding: 0px;text-align: center"> 
+				<c:otherwise>
+					<ul style="margin: 0px; background-color: lightgray;">
+						<li style="display: block; float: left; margin-left: 3em;"><a
+							href="Login.html">Login</a></li>
+						<li style="display: block; float: right; margin-right: 3em;"><a
+							href="UserRegistration.html"> Register</a></li>
+					</ul>
+				</c:otherwise>
+			</c:choose>
+			<a href = "Logout.jsp">Logout</a><br>
 
-	
+			<c:if test="${account.accountType == 'Admin' }">
+				<a href ="BanUser.html">Ban user</a>
 
-	<c:choose>
-
-	<c:when test = "${account != null}">
-
-			<c:out value = "${account.username }"></c:out><br>
-
-	</c:when>
-
-	
-
-	<c:otherwise>
-
-		<ul style="margin: 0px;background-color: lightgray;">
-
-		<li style="display: block;float: left;margin-left: 3em;"><a href = "Login.html">Login</a></li>
-
-		<li style="display: block;float: right;margin-right: 3em;"><a href ="UserRegistration.html"> Register</a></li>
-
-		</ul>
-
-	</c:otherwise>
-
-	</c:choose>
-
+			</c:if>
+			<br>
+			<p style="background-color: lightgray; padding: 1em; margin: 0px;">Find
+				computer hardware store near you!</p>
+			<button onclick="getLocation()">Click me</button>
 
 
-	
+		</div>
+		</div>
 
-	<c:if test = "${account.accountType == 'Admin' }">
-
-	
-
-		<button onclick = "modMode()">Moderator mode</button>
-
-	
-
-	</c:if>
-
-		<br>
-
-		<p style="background-color: lightgray;padding: 1em;margin: 0px;">Find computer hardware store near you!</p>
-
-		<button onclick="getLocation()">Click me</button>
-
-	
-
-	
-
-	</div>
-<!--  
-	<div id="tools" align="right">
-
-		<c:choose>
-			<c:when test="${account != null}">
-				<c:out value="${account.username }"></c:out>
-				<br>
-			</c:when>
-
-			<c:otherwise>
-				<a href="Login.html">Login</a>
-				<a href="UserRegistration.html"> Register</a>
-			</c:otherwise>
-		</c:choose>
-
-
-		<c:if test="${account.accountType == 'Admin' }">
-
-			<button onclick="modMode()">Moderator mode</button>
-
-		</c:if>
-		<br> Find computer hardware store near you!<br>
-		<button onclick="getLocation()">Click me</button>
-
-
-	</div>-->
 	<c:forEach var="row" items="${result.rows }">
 
 Welcome to <c:out value="${row.TopicName }" />
@@ -155,7 +111,7 @@ Welcome to <c:out value="${row.TopicName }" />
 				<div class="postFooter">
 					<c:out value="${post.points }"> Points </c:out>
 					&nbsp;&nbsp;&nbsp;&nbsp; Submitted by
-					<c:out value="${user.username }" />
+					<a href="UserPage.jsp?username=${user.username }"><c:out value="${user.username }" /></a>
 					on
 					<c:out value="${post.DatePosted }" />
 				</div>

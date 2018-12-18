@@ -1,158 +1,13 @@
 @charset "ISO-8859-1";
 
-body {
-	background-color:gray;
-	text-decoration: none;
-	padding: 0px;
-	margin: 0px;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	height: 100%;
-}
-ul {
-	list-style-type: none;
-	margin: 0px;
-	padding: 0px;
-	overflow: hidden;
-	background-color: purple;
-}
-li a {
-	display: block;
-	color: white;
-	text-align: inherit;
-	padding: 12px;
-	text-decoration: none;
-}
-li {
-	float: left;
-}
-input[type="text"]{
-    background: transparent;
-    border: none;
-	border-color: mediumpurple;
-}
-ul + div {
-	margin: 2em;	
-}
-div.posts > div:nth-of-type(odd) {
-    background-color: silver;
-}
-
-/* Create two equal columns that floats next to each other */
-.column1 {
-  float: left;
-  width: 70%;
-  padding: 10px;
-}
-.column2 {
-  float: right;
-  width: 25%;
-  padding: 10px;
-}
-* {
-  box-sizing: border-box;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-
-}
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-.sticky +.row {
-	margin-top: 46px;
-}
-
-button {
-    display: inline-block;
-    border: none;
-    padding: .5rem 1rem;
-    margin: 0;
-    text-decoration: none;
-    background: #0069ed;
-    color: #ffffff;
-    font-family: sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-    text-align: center;
-    transition: background 250ms ease-in-out, 
-                transform 150ms ease;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-button:hover,
-button:focus {
-    background: #0053ba;
-}
-
-button:focus {
-    outline: 1px solid #fff;
-    outline-offset: -4px;
-}
-
-button:active {
-    transform: scale(0.99);
-}
-
-input[type="submit"]{
-	display: inline-block;
-    border: none;
-    padding: .5rem 1rem;
-    margin: 0;
-    text-decoration: none;
-    background: #0069ed;
-    color: #ffffff;
-    font-family: sans-serif;
-    font-size: 1rem;
-    cursor: pointer;
-    text-align: center;
-    transition: background 250ms ease-in-out, 
-                transform 150ms ease;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-.top-container {
-  padding: 30px;
-  text-align: center;
-}
-
-
-/*SEPARATION*/
-
-
-
-
-
 #textformat1{
-	color:dimgray;
+	color:blue;
 	font-weight:bold;
 	font-size:1.5em;
 }
 
 #textformat2{
-	color: dimgray;
-	font-weight:bold;
-	font-size:1em;
-}
-#textformat3{
-	color: dimgray;
-	font-weight:bold;
-	font-size:1em;
-}
-#textformat4{
-	color: dimgray;
-	font-weight:bold;
-	font-size:1em;
-}
-#textformat5{
-	color: dimgray;
+	color: red;
 	font-weight:bold;
 	font-size:1em;
 }
@@ -167,7 +22,8 @@ html{
 }
 
 section {
-    padding: 1em;
+    border: thick solid black;
+    padding: 0.5%;
     border-radius: 10px;
     width: 30%;
     margin: 1%;
@@ -203,16 +59,30 @@ div{
 
 .btn{
 	width: 20%;
-	marging-left: 3em;
 	padding: 10px;
 	font-size: 25px;
 	border: 3px solid #ff0080;
 	background-color: green;
 	align: center;
-	top: 10%;
+	top: 50%;
 }
 
 .postFooter{
 	font-size: 75%;
 	
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+
+}
+
+.row {
+	margin-top: 46px;
+}
+
+#tools{
+	padding: 0px;
 }

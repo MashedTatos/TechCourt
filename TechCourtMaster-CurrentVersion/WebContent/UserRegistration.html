@@ -4,77 +4,38 @@
 <meta charset="ISO-8859-1">
 <title>Create Account</title>
 <link href="main.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-	integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-	crossorigin="anonymous">
 </head>
 <body>
-
-	<ul
-		style="height: 2em; border-bottom-color: mediumpurple; border-style: solid; border-width: 0px 0px 1px 0px;"
-		class="top-container">
-		<li style="float: right;">
-			<form action="SearchResult" method="post">
-				<a
-					style="background-color: aliceblue; margin: 0px; padding: 2px; opacity: .2"><input
-					type="text" name="search"><font color="black"><button>
-							<i style="color: black;" class="fas fa-search"></i>
-						</button></font></a>
-			</form>
-		</li>
-	</ul>
-	<ul class="header" id="myHeader">
-		<li><a href="Main.jsp">Home</a></li>
-		<li><a href="post.jsp?id=1">Posts</a></li>
-		<li><a href="UserPage.jsp">User</a></li>
-	</ul>
-
-	<form action="UserRegistrationServlet" method="post">
-		<section style="background-color: silver">
-			<fieldset>
-				<legend id="textformat1">
-					<b>MAKE AN ACCOUNT</b>
-				</legend>
-				<fieldset>
-					<legend id="textformat2">
-						<b>USERNAME</b>
-					</legend>
-					<input style="background-color: white;" type="text" name="username"
-						required="required" />
-				</fieldset>
-				<br>
-				<fieldset>
-					<legend id="textformat3">
-						<b>PASSWORD</b>
-					</legend>
-					<input type="password" name="password" required="required" /><br>
-					<br>
-				</fieldset>
-				<br>
-				<fieldset>
-					<legend id="textformat4">
-						<b>EMAIL</b>
-					</legend>
-					<input type="email" name="email" required="required" /><br>
-					<br>
-				</fieldset>
-				<br>
-				<fieldset>
-					<legend id="textformat5">
-						<b>BIO</b>
-					</legend>
-					<textarea name="bio" rows="3" cols="20" placeholder="ABOUT YOU"
-						required="required"></textarea>
-				</fieldset>
-				<br> <input type="submit" value="REGISTER" /> <br>
-				<br>
-				<h3>
-					<a style="display: block;color: white;text-align: inherit;padding: 12px;text-decoration: none;"
-					href="Login.html">CLICK HERE TO GO TO LOGIN PAGE</a>
-				</h3>
-			</fieldset>
-		</section>
-	</form>
+<form action="UserRegistrationServlet" method="post">
+<section>
+<fieldset>
+<legend id="textformat1"><b>MAKE AN ACCOUNT</b></legend>
+<hr>
+<fieldset>
+<legend id="textformat2"><b>USERNAME</b></legend>
+<input type="text" name="username" required="required" /><br><br>
+</fieldset>
+<br>
+<fieldset>
+<legend id="textformat2"><b>PASSWORD</b></legend>
+<input type="password" name="password" required="required" /><br><br>
+</fieldset>
+<br>
+<fieldset>
+<legend id="textformat2"><b>EMAIL</b></legend>
+<input type="email" name="email" required="required" /><br><br>
+</fieldset>
+<br>
+<fieldset>
+<legend id="textformat2"><b>BIO</b></legend>
+<textarea name="bio" rows="2" cols="50" placeholder="ABOUT YOU" required="required"></textarea>
+</fieldset>
+<br>
+<input type="submit" value="REGISTER" /> 
+<br><br>
+<h3><a href="Login.html">CLICK HERE TO GO TO LOGIN PAGE</a></h3>
+</fieldset>
+</section>
+</form>
 </body>
 </html>

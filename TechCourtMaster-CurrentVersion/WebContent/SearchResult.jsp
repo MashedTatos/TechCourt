@@ -9,13 +9,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Search Result</h1>
+<h1>Search Result for <c:out value = "${searchQuery }"></c:out></h1>
 <br>
 <div>
 <br><hr>
 <table>
 <tr>
-<th><a href="main.jsp">HOME</a></th>
+<th><a href="Main.jsp">HOME</a></th>
 <th><a href="SearchPage.html">SEARCH</a></th>
 <th><a href="AccountPage.jsp">ACCOUNT PAGE</a></th>
 </tr>

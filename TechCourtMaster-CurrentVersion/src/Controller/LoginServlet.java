@@ -20,6 +20,7 @@ import DAO.AccountDAO;
 import DAO.CommentDAO;
 import DAO.PostsDAO;
 import TechCourt.Account;
+import TechCourt.Account.AccountType;
 import TechCourt.Comment;
 import TechCourt.Post;
 
@@ -27,38 +28,48 @@ import TechCourt.Post;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public LoginServlet() {
-        super();
-    }
+	public LoginServlet() {
+		super();
+	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
+
 		Account account = AccountDAO.getAccountByUsername(username, request);
 		String dbPassword = account.getPassword();
-		
-		HttpSession session = request.getSession();
-		
-		PrintWriter out = response.getWriter();
-		
-		if(password.equals(dbPassword)) {
-			out.println("<html><head><title>Login Successful</title></head><body><h1>Login successful</h1></body></html>");
-			request.getSession().setAttribute("account", account);
-			
-			List<Post> posts = new ArrayList<Post>();
-			posts = PostsDAO.getPostByUsername(username, request);
-			request.getSession().setAttribute("posts", posts);
-			
-			List<Comment> comments = new ArrayList<Comment>();
-			
-			request.getSession().setAttribute("comments", comments);
-			request.getRequestDispatcher("AccountPage.jsp").forward(request, response);
 
-		}else {
-			out.println("<html><head><title>Login failed</title></head><body><h1>Login unsuccessful, please try again</h1></body></html>");
+		HttpSession session = request.getSession();
+
+		PrintWriter out = response.getWriter();
+		if (account.getAccountType() == AccountType.Banned) {
+			out.println("<html><head><title>Login failed</title></head><body><h1>You are banned!</h1></body></html>");
 			request.getRequestDispatcher("Login.html").include(request, response);
 		}
+
+		else {
+			if (password.equals(dbPassword)) {
+				out.println(
+						"<html><head><title>Login Successful</title></head><body><h1>Login successful</h1></body></html>");
+				request.getSession().setAttribute("account", account);
+
+				List<Post> posts = new ArrayList<Post>();
+				posts = PostsDAO.getPostByUsername(username, request);
+				request.getSession().setAttribute("posts", posts);
+
+				List<Comment> comments = new ArrayList<Comment>();
+
+				request.getSession().setAttribute("comments", comments);
+				request.getRequestDispatcher("AccountPage.jsp").forward(request, response);
+
+			} else {
+				out.println(
+						"<html><head><title>Login failed</title></head><body><h1>Login unsuccessful, please try again</h1></body></html>");
+				request.getRequestDispatcher("Login.html").include(request, response);
+			}
+		}
+
 	}
 
 }

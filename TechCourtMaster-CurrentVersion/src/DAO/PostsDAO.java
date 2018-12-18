@@ -1,4 +1,5 @@
 package DAO;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public class PostsDAO {
 		return posts;
 	}
 
-	public static void insertPost(Post post, HttpServletRequest request) {
+	public static void insertPost(Post post, HttpServletRequest request, int topicid) {
 		Connection conn = null;
 		DBUtil dbutil = new DBUtil();
 		try {
@@ -44,7 +45,7 @@ public class PostsDAO {
 			pstmt.setString(1, post.getName());
 			pstmt.setString(2, post.getContent());
 			pstmt.setInt(3, post.getAuthor().getUserID());
-			pstmt.setString(4, post.getTopic());
+			pstmt.setInt(4, topicid);
 			pstmt.executeUpdate();
 		}
 
@@ -74,7 +75,7 @@ public class PostsDAO {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		finally {
 			dbutil.closeConnection(conn);
 		}
@@ -141,16 +142,16 @@ public class PostsDAO {
 		Post post = new Post();
 		try {
 			conn = dbutil.getConnection(request);
-			PreparedStatement pstmt = conn.prepareStatement("select * from posts where author in (select userid from accounts where username = ?)");
+			PreparedStatement pstmt = conn.prepareStatement(
+					"select * from posts where author in (select userid from accounts where username = ?)");
 			pstmt.setString(1, username);
 			ResultSet set = pstmt.executeQuery();
 
-			while(set.next()) {
-				post=getPostFromSet(set,request);
+			while (set.next()) {
+				post = getPostFromSet(set, request);
 				posts.add(post);
 			}
-		}
-		catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
@@ -159,7 +160,7 @@ public class PostsDAO {
 		}
 		return posts;
 	}
-	
+
 	public static List<Post> getPostBySearch(String search, HttpServletRequest request) {
 		List<Post> posts = new ArrayList<Post>();
 		Connection conn = null;
@@ -167,16 +168,16 @@ public class PostsDAO {
 		Post post = new Post();
 		try {
 			conn = dbutil.getConnection(request);
-			PreparedStatement pstmt = conn.prepareStatement("select * from posts where content like ?");
+			PreparedStatement pstmt = conn.prepareStatement("select * from posts where content like ? or name like ?");
 			pstmt.setString(1, "%" + search + "%");
+			pstmt.setString(2, "%" + search + "%");
 			ResultSet set = pstmt.executeQuery();
 
-			while(set.next()) {
-				post=getPostFromSet(set,request);
+			while (set.next()) {
+				post = getPostFromSet(set, request);
 				posts.add(post);
 			}
-		}
-		catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
@@ -185,4 +186,54 @@ public class PostsDAO {
 		}
 		return posts;
 	}
+
+	public static void changePoints(int id, int points, HttpServletRequest request) {
+		Connection conn = null;
+		DBUtil dbutil = new DBUtil();
+		try {
+			conn = dbutil.getConnection(request);
+			PreparedStatement pstmt = conn.prepareStatement("update posts set points = points + ? where postid = ?; ");
+			PreparedStatement pstmt2 = conn.prepareStatement(
+					"update accounts set points = points + ? where userid = (select author from posts where postid = ?);");
+			pstmt.setInt(1, points);
+			pstmt.setInt(2, id);
+			pstmt2.setInt(1, points);
+			pstmt2.setInt(2, id);
+			System.out.println(pstmt2.toString());
+			pstmt.executeUpdate();
+			pstmt2.executeUpdate();
+
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		finally {
+			dbutil.closeConnection(conn);
+		}
+	}
+
+	
+	public static void deletePost(HttpServletRequest request, int id) {
+		Connection conn = null;
+		DBUtil dbutil = new DBUtil();
+		try {
+			conn = dbutil.getConnection(request);
+
+			PreparedStatement pstmt = conn.prepareStatement("update posts set content = '<em>This post has been removed by the moderators</em>' where postid = ?");
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+		}
+		
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		finally {
+			dbutil.closeConnection(conn);
+		}
+	}
 }
+
+

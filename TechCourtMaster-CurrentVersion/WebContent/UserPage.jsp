@@ -26,6 +26,7 @@ Account account = (Account)AccountDAO.getAccountByUsername(username, request);
 %>
 
 <ul
+
 		style="height: 2em; border-bottom-color: mediumpurple; border-style: solid; border-width: 0px 0px 1px 0px;"
 		class="top-container">
 		<li style="float: right;">

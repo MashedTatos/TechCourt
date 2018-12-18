@@ -173,6 +173,12 @@ public class Account implements Serializable {
 
 	}
 	
+	public void ban(HttpServletRequest request) {
+		this.setAccountType(AccountType.Banned);
+		AccountDAO.updateAccount(this,request);
+
+	}
+	
 
 	public enum AccountType{
 		User (1),

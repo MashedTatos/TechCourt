@@ -32,6 +32,7 @@ public class SearchResult extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String search = request.getParameter("search");
+		request.setAttribute("searchQuery",  request.getParameter("search"));
 		List<Post> result = PostsDAO.getPostBySearch(search, request);
 		request.getSession().setAttribute("result", result);
 		request.getRequestDispatcher("SearchResult.jsp").forward(request, response);

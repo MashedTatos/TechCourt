@@ -36,12 +36,15 @@ select * from topics
 <ul class="header" id="myHeader">
 	<li><a href="Main.jsp">Home</a></li>
 	<li><a>Posts</a></li>
-	<li><a>User</a></li>
+	<li><a href="AccountPage.jsp">User</a></li>
 </ul>
+
+
 
 <div class="content">
 	<div>
 		<h2>Topics</h2>
+
 
 
 
@@ -69,7 +72,7 @@ select * from topics
 							<br> <a href="post.jsp?id=${post.postid}"><c:out value="${post.name }"></c:out></a><br>
 							<div class="postFooter">
 								<c:out value="${post.points }"> Points </c:out> &nbsp;&nbsp;&nbsp;&nbsp; Submitted by
-								<c:out value="${user.username }" /> on
+								<a href="UserPage.jsp?username=${user.username }"><c:out value="${user.username }" /></a> on
 								<fmt:parseDate value="${post.DatePosted }" var="date" pattern="yyyy-MM-dd HH:mm:ss" dateStyle="short" timeStyle="short"/>
 								<c:out value="${date }"/>
 							</div>

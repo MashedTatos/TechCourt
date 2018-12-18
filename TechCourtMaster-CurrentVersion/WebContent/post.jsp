@@ -45,7 +45,7 @@ You are not logged in
 
 			<c:choose>
 				<c:when test="${account != null}">
-					<c:out value="${account.username }"></c:out>
+					<a href="UserPage.jsp?username=${account.username }"><c:out value="${account.username }"></c:out></a>
 					<br>
 				</c:when>
 
@@ -81,21 +81,27 @@ You are not logged in
 		</div>
 		<div id="post-header">
 			<c:out value="${CurrentPost.author.username }"></c:out>
+			<c:out value = "${CurrentPost.points }"/>
 		</div>
 		<div class="content">
-			<c:out value="${CurrentPost.content }"></c:out>
+			<c:out value="${CurrentPost.content }" escapeXml="false"></c:out>
 
 		</div>
 		<c:choose>
 			<c:when test="${account!=null }">
 				<button onclick="showAddComment()">Add a comment</button>
-				<form action="MakeComment"
-					style="visibility: collapse; margin-left: 2em;" id="addAComment"
-					method="post">
+				
+				<form action="PostAction" method = "post">
+				<input type= "submit" name="Action" value = "Like"/>
+				<input type= "submit" name="Action" value = "Dislike"/>
+				<input type = "submit" name= "Action" value ="Delete" class = "deleteButton" style="visibility:hidden;">
+					<div style="visibility: collapse; margin-left: 2em;" id="addAComment">
 					<textarea id="commentArea" name="comment" cols="40" rows="10"
 						style="height: 1px"> </textarea>
 					<input type="hidden" id="postId" name="postId" value="${param.id }" />
-					 <input type="submit" value="submit" />
+					 <input type="submit" value="Comment" name ="Action" />
+					 </div>
+					 
 				</form>
 			</c:when>
 			<c:otherwise>
@@ -116,7 +122,7 @@ You are not logged in
 					<c:out value="${ comment.content}" escapeXml="false"></c:out>
 
 					<div class="comment-footer">
-						<c:out value="${comment.author.username }"></c:out>
+						<a href="UserPage.jsp?username=${comment.author.username }"><c:out value="${comment.author.username }"></c:out></a>
 
 						<form action="CommentAction" method="POST">
 							<input type="hidden" id="commentId" name="commentId"
@@ -146,7 +152,7 @@ You are not logged in
 							<c:out value="${subcomment.content }" escapeXml="false"></c:out>
 							<br>
 							<div class="comment-footer">
-								<c:out value="${subcomment.author.username }"></c:out>
+								<a href="UserPage.jsp?username=${subcomment.author.username }"><c:out value="${subcomment.author.username }"></c:out></a>
 								<form action="CommentAction" method="POST">
 									<input type="hidden" id="commentId" name="commentId"
 										value="${subcomment.ID }"> <input type="hidden"
@@ -196,10 +202,8 @@ You are not logged in
 
 	<script>
 		window.onscroll = function() {myFunction()};
-
 		var header = document.getElementById("myHeader");
 		var sticky = header.offsetTop;
-
 		function myFunction() {
 				if (window.pageYOffset > sticky) {
 				header.classList.add("sticky");
@@ -221,7 +225,6 @@ You are not logged in
 				document.getElementById("commentArea").style.height = "1px";
 			}
 		}
-
 		function addAReply(id) {
 			if(document.getElementById("reply"+id).style.visibility == "hidden"){
 				document.getElementById("reply"+id).style.visibility = "visible";

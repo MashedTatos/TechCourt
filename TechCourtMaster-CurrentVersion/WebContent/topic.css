@@ -1,5 +1,7 @@
 @charset "ISO-8859-1";
 
+
+
 .post{
 	border-style : solid;
 	border-size: 1px;
@@ -79,6 +81,12 @@ div.posts > div:nth-of-type(odd) {
   clear: both;
 
 }
+
+.row {
+	margin-top: 200px;
+}
+
+
 
 
 
