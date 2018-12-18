@@ -11,7 +11,7 @@
 	integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
 	crossorigin="anonymous">
 <sql:setDataSource var="snapshot" driver="com.mysql.jdbc.Driver"
-	url="jdbc:mysql://localhost:3306/techcourt" user="root" password="3nhVH26Wm2705r2509" />
+	url="jdbc:mysql://localhost:3306/techcourt" user="root" password="1234" />
 <link rel="stylesheet" href="topic.css">
 <link href="topic.css" rel="stylesheet" type="text/css">
 <sql:query dataSource="${snapshot }" var="result">
