@@ -4,28 +4,61 @@
 <meta charset="ISO-8859-1">
 <title>Login Page</title>
 <link href="main.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+	integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+	crossorigin="anonymous">
 </head>
 <body>
-<form action="LoginServlet" method="post">
-<section>
-<fieldset>
-<legend id="textformat1"><b>USER LOGIN</b></legend>
-<hr>
-<fieldset>
-<legend id="textformat2"><b>USERNAME</b></legend>
-<input type="text" name="username" required="required" /><br><br>
-</fieldset>
-<br>
-<fieldset>
-<legend id="textformat2"><b>PASSWORD</b></legend>
-<input type="password" name="password" required="required" /><br><br>
-</fieldset>
-<br>
-<input type="submit" value="LOGIN" />
-<br><br><hr>
-<h3><a href="UserRegistration.html">CLICK HERE TO CREATE AN ACCOUNT</a></h3>
-</fieldset>
-</section>
-</form>
+	
+	<ul style="height: 2em; border-bottom-color: mediumpurple; border-style: solid; border-width: 0px 0px 1px 0px;"
+		class="top-container">
+
+		<li style="float: right;">
+			<form action="SearchResult" method="post">
+				<a
+					style="background-color: aliceblue; margin: 0px; padding: 2px; opacity: .2"><input
+					type="text" name="search"><font color="black"><button>
+							<i style="color: black;" class="fas fa-search"></i>
+						</button></font></a>
+			</form>
+		</li>
+	</ul>
+	<ul class="header" id="myHeader">
+		<li><a href="Main.jsp">Home</a></li>
+		<li><a>Posts</a></li>
+		<li><a>User</a></li>
+	</ul>
+	
+	
+	<form action="LoginServlet" method="post">
+		<section style="background-color: silver;">
+			<fieldset>
+				<legend id="textformat1">
+					<b>USER LOGIN</b>
+				</legend>
+				<fieldset>
+					<legend id="textformat2">
+						<b>USERNAME</b>
+					</legend>
+					<input style="background-color: white" type="text" name="username" required="required" /><br>
+					<br>
+				</fieldset>
+				<br>
+				<fieldset>
+					<legend id="textformat3">
+						<b>PASSWORD</b>
+					</legend>
+					<input type="password" name="password" required="required" /><br>
+					<br>
+				</fieldset>
+				<br> <input type="submit" value="LOGIN" /> <br>
+				<br>
+				<h3>
+					<a style="display: block;color: white;text-align: inherit;padding: 12px;text-decoration: none;" href="UserRegistration.html">CREATE AN ACCOUNT</a>
+				</h3>
+			</fieldset>
+		</section>
+	</form>
 </body>
 </html>
