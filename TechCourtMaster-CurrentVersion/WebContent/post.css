@@ -1,58 +1,179 @@
 @charset "ISO-8859-1";
 
+body {
+	background-color:gray;
+	text-decoration: none;
+	padding: 0px;
+	margin: 0px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	height: 100%;
+}
+ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+	background-color: purple;
+}
+li a {
+	display: block;
+	color: white;
+	text-align: left;
+	padding: 12px;
+	text-decoration: none;
+}
+li {
+	float: left;
+}
+input[type="text"]{
+    background: transparent;
+    border: none;
+	border-color: mediumpurple;
+}
+ul + div {
+	margin: 2em;	
+}
+div.posts > div:nth-of-type(odd) {
+    background-color: silver;
+}
+
+/* Create two equal columns that floats next to each other */
+.column1 {
+  float: left;
+  width: 70%;
+  padding: 10px;
+}
+.column2 {
+  float: right;
+  width: 25%;
+  padding: 10px;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.sticky +.row {
+	margin-top: 46px;
+}
+
+button {
+    display: inline-block;
+    border: none;
+    padding: .5rem 1rem;
+    margin: 0;
+    text-decoration: none;
+    background: #0069ed;
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+button:hover,
+button:focus {
+    background: #0053ba;
+}
+
+button:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+button:active {
+    transform: scale(0.99);
+}
+
+input[type="submit"]{
+	display: inline-block;
+    border: none;
+    padding: .5rem 1rem;
+    margin: 0;
+    text-decoration: none;
+    background: #0069ed;
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.top-container {
+  padding: 30px;
+  text-align: center;
+}
+
+/*SEPARATION*/
+
+
 .content{
+	border-width:1px;
 	border-style : solid;
-	margin-left:100px;
-	margin-right : 600px;
+	background-color: lightgray;
 	
 }
 .comment{
-	margin-left: 120px;
 	border-style : solid;
 	border-width:1px;
-	margin-right: 700px;
+	background-color: lightgray;
+	margin-top:1em;
+	margin-left: 1em;
+	padding: .5em;
 }
 
 .subcomment{
-	margin-left: 140px;
-	margin-right: 700px;
 	border:1px solid;
-	margin-top:10px;
+	margin-top:1em;
+	margin-left: 2em;
+	background-color: lightgray;
+	padding: .5em;
 }
 
 #title{
 	font-size: 200%;
-	margin-left: 100px;
 }
 
 .comment-footer{
 	font-size: 75%;
+	margin-left: 1em;
 }
 
 .reply{
 	height: 1px;
 	border:none;
-	background-color: #e6e6e6;
+	background-color: darkgray;
+	margin-left: 1em;
 }
 
 #post-header{
-	margin-left: 100px;
 	font-size: 80%;
 }
 
 .code-block{
 	border:inset;
-	margin-left:25px;
-	margin-right:300px;
-	background-color:#d9d9d9;
+	background-color:darkgray;
 }
 
 #tools{
-	border:solid;
-	vertical-align:top;
-	margin-left:1600px;
-	position:absolute;
-	top:0px;
-	right:0px;
-	
+	padding: 0px;
 }
