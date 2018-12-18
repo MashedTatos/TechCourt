@@ -1,0 +1,133 @@
+@charset "ISO-8859-1";
+
+.post{
+	border-style : solid;
+	border-size: 1px;
+	margin-top: 5px;
+	margin-right: 700px;
+}
+
+.postFooter{
+	font-size: 75%;
+	
+}
+
+
+#tools{
+	border:solid;
+	vertical-align:top;
+	margin-left:1600px;
+	position:absolute;
+	top:0px;
+	right:0px;
+	
+}
+
+body {
+	background-color:gray;
+	text-decoration: none;
+	padding: 0px;
+	margin: 0px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	height: 100%;
+}
+ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+	background-color: purple;
+}
+li a {
+	display: block;
+	color: white;
+	text-align: left;
+	padding: 12px;
+	text-decoration: none;
+}
+li {
+	float: left;
+}
+input[type="text"]{
+    background: transparent;
+    border: none;
+	border-color: mediumpurple;
+}
+ul + div {
+	margin: 2em;	
+}
+div.posts > div:nth-of-type(odd) {
+    background-color: silver;
+}
+
+/* Create two equal columns that floats next to each other */
+.column1 {
+  float: right;
+  width: 70%;
+  padding: 10px;
+}
+.column2 {
+  float: right;
+  width: 30%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+
+}
+
+
+
+button {
+    display: inline-block;
+    border: none;
+    padding: .5rem 1rem;
+    margin: 0;
+    text-decoration: none;
+    background: #0069ed;
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+button:hover,
+button:focus {
+    background: #0053ba;
+}
+
+button:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+button:active {
+    transform: scale(0.99);
+}
+
+input[type="submit"]{
+	display: inline-block;
+    border: none;
+    padding: .5rem 1rem;
+    margin: 0;
+    text-decoration: none;
+    background: #0069ed;
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
